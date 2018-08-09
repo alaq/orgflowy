@@ -9,8 +9,9 @@ const org = `
 #+TITLE: org web view todo list
 #+TODO: TODO WAITING | DONE CANCELLED
 
-* Display
+* Display *bold*
 ** TODO change body font
+** *Display* /styling/ _of_ ~text~
 ** DONE display basic text
 ** DONE display links
 ** TODO display code blocks
@@ -76,6 +77,12 @@ class App extends React.Component {
           )
         case 'text':
           return node.value
+        case 'bold':
+          return (<b>{this.processNodes(node.children)}</b>)
+                case 'italic':
+          return (<i>{this.processNodes(node.children)}</i>)
+                case 'underlined':
+          return (<u>{this.processNodes(node.children)}</u>)
         case 'link':
           return (
             <a key={key} contentEditable="false" className="links" href={node.uri.raw}>
