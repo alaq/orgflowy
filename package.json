@@ -1,0 +1,23 @@
+{
+  "name": "org",
+  "version": "0.0.1",
+  "description": "an experimental workflowy clone using Org mode as a backend",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel index.html -p 8000"
+  },
+  "dependencies": {
+    "parcel": "^1.9.7",
+    "orga": "^0.5.3",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "babel-preset-react-app": "^3.1.2"
+  },
+  "engines": {
+    "node": "8.x"
+  },
+  "license": "MIT",
+  "keywords": [
+    "org-mode"
+  ]
+}
