@@ -81,7 +81,7 @@ class App extends React.Component {
           return (<b>{this.processNodes(node.children)}</b>)
                 case 'italic':
           return (<i>{this.processNodes(node.children)}</i>)
-                case 'underlined':
+                case 'underline':
           return (<u>{this.processNodes(node.children)}</u>)
         case 'link':
           return (
