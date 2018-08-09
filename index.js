@@ -10,6 +10,7 @@ const org = `
 #+TODO: TODO WAITING | DONE CANCELLED
 
 * Display
+** TODO change body font
 ** DONE display basic text
 ** DONE display links
 ** TODO display code blocks
@@ -93,6 +94,12 @@ class App extends React.Component {
                 {keyword}
               </div>{' '}
               {this.processNodes(node.children)}
+            </div>
+          )
+        case 'list.item':
+          return (
+            <div key={key} className={node.type}>
+              - [ ] {this.processNodes(node.children)}
             </div>
           )
         default:
