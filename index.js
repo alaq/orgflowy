@@ -62,7 +62,6 @@ class App extends React.Component {
   processNodes(nodes) {
     return nodes.map(node => {
       const key = rand()
-      console.log('key:', key)
       flatAst[key] = node
       switch (node.type) {
         case 'root':
@@ -116,6 +115,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    console.log('mounting component');
     ast = parse(org)
     console.log('AST\n---\n', ast)
     console.log(this.processNodes([ast]))
