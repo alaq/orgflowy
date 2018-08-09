@@ -118,7 +118,6 @@ class App extends React.Component {
     console.log('mounting component');
     ast = parse(org)
     console.log('AST\n---\n', ast)
-    console.log(this.processNodes([ast]))
     this.setState({
       title: ast.meta.title,
       org: ast,
