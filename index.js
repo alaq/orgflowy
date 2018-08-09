@@ -1,7 +1,7 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'
+import ReactDOM from 'react-dom'
 
-import './style.css';
+import './style.css'
 
 const { parse } = require(`orga`)
 
@@ -40,59 +40,85 @@ Using [[https://github.com/dropbox/dropbox-sdk-js/][the Dropbox JS SDK]]
 ** Double mounting of the component during initialization
 `
 
-const rand = () => Math.random().toString(36).replace('0.', '');
+const rand = () =>
+  Math.random()
+    .toString(36)
+    .replace('0.', '')
 
-let ast;
-let flatAst = {};
+let ast
+let flatAst = {}
 
 class App extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-      title: "Loading...",
+      title: 'Loading...',
       org: ''
     }
-    this.keywordOnClick = this.keywordOnClick.bind(this);
-    this.updateTitle = this.updateTitle.bind(this);
+    this.keywordOnClick = this.keywordOnClick.bind(this)
+    this.updateTitle = this.updateTitle.bind(this)
   }
-  
+
   processNodes(nodes) {
     return nodes.map(node => {
-      const key = rand();
-      console.log("key:", key);
-      flatAst[key] = node;
-      switch(node.type) {
-        case "root":
-          console.log("generating tree");
-          flatAst = {};
-          return (<div contentEditable="true" value={this.state.title} className="root">{this.processNodes(node.children)}</div>)
-        case "text":
+      const key = rand()
+      console.log('key:', key)
+      flatAst[key] = node
+      switch (node.type) {
+        case 'root':
+          console.log('generating tree')
+          flatAst = {}
+          return (
+            <div contentEditable="true" value={this.state.title} className="root">
+              {this.processNodes(node.children)}
+            </div>
+          )
+        case 'text':
           return node.value
-        case "link":
-          return (<a key={key} contentEditable="false" className="links" href={node.uri.raw}>{node.desc}</a>)
-        case "headline":
+        case 'link':
+          return (
+            <a key={key} contentEditable="false" className="links" href={node.uri.raw}>
+              {node.desc}
+            </a>
+          )
+        case 'headline':
           let keyword
-          if (node.keyword) { keyword = node.keyword }
-          return (<div key={key} className={node.type}> - <div key={key} onClick={() => this.keywordOnClick(key)} contentEditable="false" className="keyword">{keyword}</div> {this.processNodes(node.children)}</div>)
+          if (node.keyword) {
+            keyword = node.keyword
+          }
+          return (
+            <div key={key} className={node.type}>
+              {' '}
+              -{' '}
+              <div key={key} onClick={() => this.keywordOnClick(key)} contentEditable="false" className="keyword">
+                {keyword}
+              </div>{' '}
+              {this.processNodes(node.children)}
+            </div>
+          )
         default:
-          return (<div key={key} className={node.type}>{this.processNodes(node.children)}</div>)
+          return (
+            <div key={key} className={node.type}>
+              {this.processNodes(node.children)}
+            </div>
+          )
       }
     })
   }
-  
+
   keywordOnClick(key) {
-    flatAst[key].keyword = this.state.todos[this.state.todos.indexOf(flatAst[key].keyword) + 1];
-    this.setState({org: ast});
+    flatAst[key].keyword = this.state.todos[this.state.todos.indexOf(flatAst[key].keyword) + 1]
+    this.setState({ org: ast })
   }
 
   nodeWrapper(tree) {
-    return this.processNodes([tree]);
+    return this.processNodes([tree])
   }
-  
+
   componentDidMount() {
-    ast = parse(org);
-    console.log("AST\n---\n", ast);
-    console.log(this.processNodes([ast]));
+    ast = parse(org)
+    console.log('AST\n---\n', ast)
+    console.log(this.processNodes([ast]))
     this.setState({
       title: ast.meta.title,
       org: ast,
@@ -101,22 +127,24 @@ class App extends React.Component {
   }
 
   updateTitle(e) {
-    this.setState({title: e.target.innerHTML })
+    this.setState({ title: e.target.innerHTML })
   }
-  
+
   render() {
     return (
       <div className="App">
-        <h1 contentEditable="true" onInput={this.updateTitle} className="App-Title">{this.state.title}</h1>
+        <h1 contentEditable="true" onInput={this.updateTitle} className="App-Title">
+          {this.state.title}
+        </h1>
         {this.state.org && this.nodeWrapper(this.state.org)}
       </div>
-    );
+    )
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'))
 
 // Hot Module Replacement
 if (module.hot) {
-  module.hot.accept();
+  module.hot.accept()
 }
