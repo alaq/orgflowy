@@ -35,6 +35,7 @@ const org = `
 ** TODO Mobile drag and drop
 Atlassian's [[https://github.com/atlassian/react-beautiful-dnd][react-beautiful-dnd]]
 This is a second line
+And a third line
 * Dropbox Compatibility
 Using [[https://github.com/dropbox/dropbox-sdk-js/][the Dropbox JS SDK]]
 * Bugs
@@ -99,7 +100,7 @@ class App extends React.Component {
         case 'list.item':
           return (
             <div key={key} className={node.type}>
-              - [ ] {this.processNodes(node.children)}
+              <input type="checkbox" /> {this.processNodes(node.children)}
             </div>
           )
         default:
