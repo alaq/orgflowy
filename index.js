@@ -115,7 +115,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    console.log('mounting component');
+    console.log('mounting component')
     ast = parse(org)
     console.log('AST\n---\n', ast)
     this.setState({
@@ -130,12 +130,14 @@ class App extends React.Component {
   }
 
   render() {
+    document.title = this.state.title || ast.meta.title
     return (
       <div className="App">
         <h1 contentEditable="true" onInput={this.updateTitle} className="App-Title">
           {this.state.title}
         </h1>
         {this.state.org && this.nodeWrapper(this.state.org)}
+        <input type="radio" name="completed" checked /><label for="huey">Show Completed</label>
       </div>
     )
   }
