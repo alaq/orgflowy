@@ -137,20 +137,12 @@ class App extends React.Component {
           {this.state.title}
         </h1>
         {this.state.org && this.nodeWrapper(this.state.org)}
-        <div style={divStyle} >
+        <div className="footer" >
           <input type="checkbox" id="completed" checked /><label for="completed">Show completed</label>
         </div>
       </div>
     )
   }
-}
-
-const divStyle = {
-  color: 'gray',
-  backgroundColor: 'lightgrey',
-  padding: '5px',
-  margin: '20px',
-  borderRadius: '5px'
 }
 
 ReactDOM.render(<App />, document.getElementById('root'))

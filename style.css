@@ -11,3 +11,11 @@
 .paragraph {
   color: grey;
 }
+
+.footer {
+  color: gray;
+  background-color: lightgrey;
+  padding: 5px;
+  margin: 20px;
+  border-radius: 5px;
+}
